@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+标签
+{% endblock %}
+
+{% block navbar %}
+{% include 'base_nav.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="mt-auto pb-auto">
+  <div class="container">
+    <h2>新增/修改标签</h2>
+    <div class="row">
+      <form method="post">
+        {% csrf_token %}
+        标签名: {{ form.name }}
+        <input type="submit" value="提交">
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

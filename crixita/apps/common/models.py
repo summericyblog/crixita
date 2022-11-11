@@ -5,7 +5,7 @@ SLUG_LENGTH = 50
 
 
 def get_unique_slug(model_instance):
-    slugified = slugify(model_instance.name, aloow_unicode=True)
+    slugified = slugify(model_instance.name, allow_unicode=True)
     if len(slugified) > SLUG_LENGTH:
         slug = slugified[:SLUG_LENGTH]
     else:
@@ -33,10 +33,10 @@ class SlugMixin:
 class Tag(SlugMixin, models.Model):
     name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=50, blank=True)
-    t_type = models.CharField(max_length=200, blank=True)
+    fathers = models.ManyToManyField('Tag', blank=True, related_name='children')
 
     class Meta:
-        ordering = ['t_type']
+        ordering = ['name']
 
     def __str__(self):
         return self.name
