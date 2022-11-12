@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ object.name }}
+{% endblock %}
+
+{% block navbar %}
+{% include 'base_nav.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="mt-auto pb-auto">
+  <div class="container">
+    <h2>{{ object.name }}</h2>
+    <a href="{% url 'tag-edit' object.slug %}"><span class="badge bg-primary">编辑</span></a>
+    <a href="{% url 'tag-edit' object.slug %}"><span class="badge bg-primary">编辑分类</span></a>
+    <a href="{% url 'tag-delete' object.slug %}"><span class="badge bg-danger">删除</span></a>
+    <div class="row">
+      <div>
+        <p>直接分类</p>
+        {% for t in direct_fathers %}
+        <a href="{% url 'tag-detail' t.slug %}">{{ t.name }}</a>
+        {% endfor %}
+      </div>
+      <div>
+        <p>从属分类</p>
+        {% for t in fathers %}
+        <a href="{% url 'tag-detail' t.slug %}">{{ t.name }}</a>
+        {% endfor %}
+      </div>
+      <div>
+        然后展示分类下的各种东西
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
